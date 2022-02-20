@@ -1,13 +1,45 @@
+let firstOperand = ''
+let secondOperand = ''
+let currentOperation = null
+let resetScreen = false
+
 const buttons = document.querySelectorAll(".button");
 const numberBtn = document.querySelectorAll(".number");
 const operatorBtn = document.querySelectorAll(".operator");
 
-const previousOperand = document.querySelector(".previous-operand");
-const currentOperand = document.querySelector(".current-operand");
+let previousOperand = document.querySelector("#previous-operand");
+let currentOperand = document.querySelector("#current-operand");
 
 const deleteBtn = document.querySelector(".delete");
 const clearBtn = document.querySelector(".clear");
 const equalsBtn = document.querySelector(".equals");
+
+// window.addEventListener('keydown', handleKeyboardInput)
+// equalsBtn.addEventListener('click', evaluate)
+// clearBtn.addEventListener('click', clear)
+// deleteBtn.addEventListener('click', deleteNumber)
+
+
+numberBtn.forEach(button => {
+  button.addEventListener("click", () => {
+    displayValue(button);
+  });
+});
+
+operatorBtn.forEach(button => {
+  button.addEventListener("click", () => {
+    displayValue(button);
+    chooseOperation(button.textContent);
+  });
+});
+
+equalsBtn.addEventListener("click", () => {
+  // clear();
+  const firstNumber = previousOperand.textContent;
+  const operator = operatorBtn.textContent;
+  const secondNumber = currentOperand.textContent;
+  console.log(operate(firstNumber, operator, secondNumber));
+});
 
 const displayValue = (keyPress) => {
   const currentValue = keyPress.textContent;
@@ -15,10 +47,18 @@ const displayValue = (keyPress) => {
   return (previousOperand.textContent += currentValue);
 };
 
-numberBtn.forEach(button => {
-  button.addEventListener("click", () => { displayValue(button); });
-});
+function resetDisplay() {
+  currentOperand.textContent = ''
+  resetScreen = false;
+}
 
+const chooseOperation = (sign) => {
+  operation = sign;
+  currentOperand.textContent = '';
+  if (previousOperand.textContent !== '') {
+    operate(operation);
+  }
+}
 
 //Operations
 function add(a, b) {
@@ -38,26 +78,28 @@ function divide(a, b) {
 };
 
 
-const operate = (firstNum, secNum, operator) => {
+const operate = (firstNumber, operator, secondNumber) => {
+
+  const prev = parseFloat(firstNumber);
+  const current = parseFloat(secondNumber);
+
+  if (isNaN(prev) || isNaN(current)) return;
   switch (operator) {
-    case 'plus':
-      return add(firstNum, secNum);
-    case 'minus':
-      return subtract(firstNum, secNum);
-    case 'multiply':
-      return multiply(firstNum, secNum);
-    case 'divide':
-      if(secNum === 0 || secNum === '0') return 'Stop it!'
-      else return divide(firstNum, secNum);
+    case '+':
+      return prev + current
+    case '-':
+      return prev - current
+    case '*':
+      return prev * current
+    case '÷':
+      return prev / current
     default:
-      break;
+      return
   }
 }
 
-const clear = (currentOperand, previousOperand, operation) => {
-  operation = undefined;
+const clear = () => {
+  let operation = undefined;
   currentOperand = '';
   previousOperand = '';
 };
-
-
