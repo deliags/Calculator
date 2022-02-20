@@ -79,6 +79,11 @@ body{
   align-items: center;
 }
 
+.delete{
+  grid-column: span 1;
+  font-size: 40px;
+}
+
 .equals{
   grid-column: span 2;
   display: flex;
