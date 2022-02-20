@@ -43,7 +43,7 @@ body{
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-end;
-  
+  min-height: 100px;
 }
 
 .display-text{
@@ -54,12 +54,20 @@ body{
   color: rgb(46, 176, 134);
 }
 
+.button{
+  cursor: pointer;
+}
+
 .operator {
   background-color:rgb(46, 176, 134);
   display: flex;
   justify-content: center;
   align-items: center;
   color: rgb(49, 53, 82);
+}
+
+.operator:hover{
+  background-color:rgba(58, 219, 168, 0.925);
 }
 
 .number{
@@ -70,6 +78,10 @@ body{
   color: rgb(49, 53, 82);
 }
 
+.number:hover{
+  background-color:rgba(245, 231, 191, 0.945);
+}
+
 .control{
   background-color:rgb(184, 64, 94);
   color: rgb(238, 230, 206);
@@ -77,6 +89,10 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.control:hover{
+  background-color:rgb(218, 62, 101);
 }
 
 .delete{
