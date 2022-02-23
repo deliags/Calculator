@@ -48,10 +48,6 @@ body{
   word-break: break-all;
 }
 
-.previous-operand{
-  font-size: 30px;
-}
-
 .current-operand{
   color: rgb(46, 176, 134);
 }
